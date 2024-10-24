@@ -1,0 +1,28 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    container_name: backend-container
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NAME=Kyla
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend-container
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      - NAME=Kyla
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
